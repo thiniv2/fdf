@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = fdf
-FLAGS = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -L /usr/lib/X11 -lmlx -lXext -lX11
 SRC = src/main.c src/map_info.c src/draw.c src/deal_key.c
 HDR = fdf.h
 LIB = libft/libft.a
