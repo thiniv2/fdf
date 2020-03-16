@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
+/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:37:18 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/12 15:12:33 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/03/16 11:11:06 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@
 # define MAGENTA 0xFF00FF
 # define RED 0xFC030B
 # define TEAL 0xFFFFF
-# define KEY_W 13
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_A 0
-# define KEY_ESC 53
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
-# define KEY_LEFT 123
-# define KEY_I 34
-# define KEY_P 35
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_A 97
+# define KEY_ESC 65307
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_RIGHT 65363
+# define KEY_LEFT 65361
+# define KEY_I 105
+# define KEY_R 114
+# define KEY_P 112
 # define ROTATION_DEG 0.05
 
 #include <stdio.h> //DELETE

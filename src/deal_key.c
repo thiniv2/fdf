@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deal_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
+/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:09:08 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/12 15:18:44 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/03/16 11:49:59 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@ void		reset_pos(t_info *info)
 		info->zoom = 15;
 		if (info->is_isometric == 1)
 		{
-			info->p_x = 400;
-			info->p_y = 100;
+			info->p_x = 250;
+			info->p_y = 250;
 		}
 		else
 		{
-			info->p_x = 100;
-			info->p_y = 100;
+			info->p_x = 250;
+			info->p_y = 250;
 		}
 	draw_grid(info, 0, 0);
 }
 
 int			deal_key(int keycode, t_info *info)
 {
+
+	printf("keycode: %d\n", keycode);
+
 	if (keycode == KEY_UP)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
@@ -78,21 +81,22 @@ int			deal_key(int keycode, t_info *info)
 		info->p_y += 25;
 		draw_grid(info, 0, 0);
 	}
-	if (keycode == KEY_I)
+	if (keycode == KEY_R)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
-		info->is_isometric = 1;
+		printf("isometric 1 = %d\n", info->is_isometric);
+		info->is_isometric = 2 ? 1 : 0;
+		/*
+		if (info->is_isometric == 2)
+			info->is_isometric = 0;
+		else
+			info->is_isometric = 1;
+		*/
+		printf("isometric 2 = %d\n", info->is_isometric);
 		reset_pos(info);
 		draw_grid(info, 0, 0);
 	}
-	if (keycode == KEY_P)
-	{
-		mlx_clear_window(info->mlx_ptr, info->win_ptr);
-		info->is_isometric = 0;
-		reset_pos(info);
-		draw_grid(info, 0, 0);
-	}
-	
+
 	if (keycode == KEY_ESC)
 		close_program(info);
 	return (0);

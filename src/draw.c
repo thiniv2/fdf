@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
+/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:59:30 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/12 15:14:30 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/03/16 11:38:23 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,29 @@ void	apply_iso(t_info *info)
 		}
 		y++;
 	}
-	info->is_isometric = 0;
+	info->is_isometric = 2;
+}
+
+void	apply_parallel(t_info *info)
+{
+	int		x;
+	int		y;
+	t_arr	***ptr;
+
+	ptr = info->array;
+	y = 0;
+	x = 0;
+	while (y < info->size_y)
+	{
+		x = 0;
+		while (x < info->size_x)
+		{
+			(*ptr)[y][x].x = x;
+			(*ptr)[y][x].y = y;
+			x++;
+		}
+		y++;
+	}
 }
 
 int		draw_grid(t_info *info, int x, int y)
@@ -45,9 +67,11 @@ int		draw_grid(t_info *info, int x, int y)
 	int		color;
 
 	ptr = info->array;
-	color = (*ptr)[0][0].color;
+	printf("isometric 3 = %d\n", info->is_isometric);
 	if (info->is_isometric == 1)
 		apply_iso(info);
+	if (info->is_isometric == 0)
+		apply_parallel(info);
 	while (y < info->size_y)
 	{
 		x = 0;
