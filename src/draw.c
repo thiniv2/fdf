@@ -6,7 +6,7 @@
 /*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:59:30 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 11:38:23 by thien            ###   ########.fr       */
+/*   Updated: 2020/03/16 13:18:22 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,36 @@ void	apply_parallel(t_info *info)
 	}
 }
 
+void	apply_height(t_info *info, int key)
+{
+	int		x;
+	int		y;
+	t_arr	***ptr;
+
+	ptr = info->array;
+	y = 0;
+	x = 0;
+	while (y < info->size_y)
+	{
+		x = 0;
+		while (x < info->size_x)
+		{
+			if (key == 122)
+				(*ptr)[y][x].z += 3;
+			else
+				(*ptr)[y][x].z -= 3;
+			x++;
+		}
+		y++;
+	}
+}
+
 int		draw_grid(t_info *info, int x, int y)
 {
 	t_arr	***ptr;	
 	int		color;
 
 	ptr = info->array;
-	printf("isometric 3 = %d\n", info->is_isometric);
 	if (info->is_isometric == 1)
 		apply_iso(info);
 	if (info->is_isometric == 0)
@@ -81,6 +104,8 @@ int		draw_grid(t_info *info, int x, int y)
 			{
 				if ((*ptr)[y][x].color == RED && (*ptr)[y][x + 1].color == RED)
 					color = RED;
+				else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
+					color = GREEN;
 				else
 					color = TEAL;
 				draw_line(info, (*ptr)[y][x].x * info->zoom + info->p_x,
@@ -92,6 +117,8 @@ int		draw_grid(t_info *info, int x, int y)
 			{
 				if ((*ptr)[y][x].color == RED && (*ptr)[y + 1][x].color == RED)
 					color = RED;
+				else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
+					color = GREEN;
 				else
 					color = TEAL;
 				draw_line(info, (*ptr)[y][x].x * info->zoom + info->p_x,

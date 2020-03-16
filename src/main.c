@@ -6,7 +6,7 @@
 /*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:37:25 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 11:16:20 by thien            ###   ########.fr       */
+/*   Updated: 2020/03/16 12:57:03 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			main(int argc, char **argv)
 	if (!(info = (t_info*)malloc(sizeof(t_info))))
 		error_msg();
 	info->mlx_ptr = mlx_init();
-	info->win_ptr = mlx_new_window(info->mlx_ptr, 500, 500, "fdf");
+	info->win_ptr = mlx_new_window(info->mlx_ptr, 700, 700, "fdf");
 	info->zoom = 20;
 	info->p_x = 100;
 	info->p_y = 200;

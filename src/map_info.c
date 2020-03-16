@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
+/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:37:00 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/12 15:15:43 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/03/16 13:10:31 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,17 @@ t_arr	**create_int_arr(char **argv, t_info *info)
 		{
 			arr[y][x].x = x;
 			arr[y][x].y = y;
-			while (ft_isalnum(*line) == 0 && *line)
+			while (ft_isalnum(*line) == 0 && *line && *line != '-')
 				line++;
 			if (*line)
 			{
 				arr[y][x].z = ft_atoi(line);
+				printf("z = %f\n", arr[y][x].z);
 				if (arr[y][x].z > 0)
 					arr[y][x].color = RED;
-				else 
+				else if (arr[y][x].z == 0)
+					arr[y][x].color = GREEN;
+				else
 					arr[y][x].color = TEAL;
 			}
 			while (ft_isdigit(*line) && *line)

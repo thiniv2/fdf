@@ -6,7 +6,7 @@
 /*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:09:08 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 11:49:59 by thien            ###   ########.fr       */
+/*   Updated: 2020/03/16 13:19:27 by thien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void		reset_pos(t_info *info)
 
 int			deal_key(int keycode, t_info *info)
 {
+	t_arr	***ptr;
 
-	printf("keycode: %d\n", keycode);
+	ptr = info->array;
+//	printf("keycode: %d\n", keycode);
 
 	if (keycode == KEY_UP)
 	{
@@ -84,19 +86,16 @@ int			deal_key(int keycode, t_info *info)
 	if (keycode == KEY_R)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
-		printf("isometric 1 = %d\n", info->is_isometric);
-		info->is_isometric = 2 ? 1 : 0;
-		/*
-		if (info->is_isometric == 2)
-			info->is_isometric = 0;
-		else
-			info->is_isometric = 1;
-		*/
-		printf("isometric 2 = %d\n", info->is_isometric);
+		info->is_isometric = info->is_isometric == 2 ? 0 : 1;
 		reset_pos(info);
 		draw_grid(info, 0, 0);
 	}
-
+	if (keycode == KEY_Z || keycode == KEY_C)
+	{
+		mlx_clear_window(info->mlx_ptr, info->win_ptr);
+		apply_height(info, keycode);
+		draw_grid(info, 0, 0);
+	}
 	if (keycode == KEY_ESC)
 		close_program(info);
 	return (0);
