@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+         #
+#    By: thien <thien@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 12:46:14 by thinguye          #+#    #+#              #
-#    Updated: 2020/03/12 15:10:11 by thinguye         ###   ########.fr        #
+#    Updated: 2020/03/16 10:42:24 by thien            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-FLAGS = -L /usr/lib/X11 -lmlx -lXext -lX11
+FLAGS = -L /usr/lib/X11 -lmlx -lXext -lX11 -lm
 SRC = src/main.c src/map_info.c src/draw.c src/deal_key.c
 HDR = fdf.h
 LIB = libft/libft.a
