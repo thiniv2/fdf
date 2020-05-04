@@ -20,8 +20,7 @@ int		error_msg()
 
 void		show_buttons(t_info *info)
 {
-	mlx_string_put(info->mlx_ptr, info->win_ptr, 10, 10, 0xFFFFF, "I: isometric");
-	mlx_string_put(info->mlx_ptr, info->win_ptr, 10, 25, 0xFFFFF, "P: parallel");
+	mlx_string_put(info->mlx_ptr, info->win_ptr, 10, 10, 0xFFFFF, "R: Change projection");
 	mlx_string_put(info->mlx_ptr, info->win_ptr, 10, 55, 0xFFFFF, "WASD: move around");
 	mlx_string_put(info->mlx_ptr, info->win_ptr, 10, 70, 0xFFFFF, "arrow up/down: zoom in/zoom out");
 }

@@ -12,6 +12,7 @@
 
 NAME = fdf
 FLAGS = -L /usr/lib/X11 -lmlx -lXext -lX11 -lm
+FLGS = minilibx/minilibx/libmlx.a -lm -lX11 -lXext
 SRC = src/main.c src/map_info.c src/draw.c src/deal_key.c
 HDR = fdf.h
 LIB = libft/libft.a
@@ -23,7 +24,7 @@ $(NAME):
 	@make -C libft
 	@make -C libft clean
 	@echo compiling executable
-	@gcc $(SRC) -I $(HDR) $(LIB) $(FLAGS) -o $(NAME)
+	@gcc $(SRC) -I $(HDR) $(LIB) $(FLGS) -o $(NAME)
 	@echo success
 
 clean:
