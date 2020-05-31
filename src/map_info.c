@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:37:00 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 13:10:31 by thien            ###   ########.fr       */
+/*   Updated: 2020/05/28 13:37:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_arr	**create_int_arr(char **argv, t_info *info)
 			if (*line)
 			{
 				arr[y][x].z = ft_atoi(line);
-				printf("z = %f\n", arr[y][x].z);
 				if (arr[y][x].z > 0)
 					arr[y][x].color = RED;
 				else if (arr[y][x].z == 0)

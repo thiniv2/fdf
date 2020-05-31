@@ -3,91 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thinguye <thinguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:59:30 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 13:18:22 by thien            ###   ########.fr       */
+/*   Updated: 2020/05/31 23:34:53 by thinguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	apply_iso(t_info *info)
+void	draw_x(t_info *info, int y, int x)
 {
-	int		x;
-	int		y;
-	float	prev_x;
-	float	prev_y;
 	t_arr	***ptr;
 
 	ptr = info->array;
-	y = 0;
-	x = 0;
-	while (y < info->size_y)
+	if (x < info->size_x - 1)
 	{
-		x = 0;
-		while (x < info->size_x)
-		{
-			prev_x = (*ptr)[y][x].x;
-    		prev_y = (*ptr)[y][x].y;
-			(*ptr)[y][x].x = (prev_x - prev_y) * cos(0.523599);
-			(*ptr)[y][x].y = -(*ptr)[y][x].z + (prev_x + prev_y) * sin(0.523599);
-			x++;
-		}
-		y++;
-	}
-	info->is_isometric = 2;
-}
-
-void	apply_parallel(t_info *info)
-{
-	int		x;
-	int		y;
-	t_arr	***ptr;
-
-	ptr = info->array;
-	y = 0;
-	x = 0;
-	while (y < info->size_y)
-	{
-		x = 0;
-		while (x < info->size_x)
-		{
-			(*ptr)[y][x].x = x;
-			(*ptr)[y][x].y = y;
-			x++;
-		}
-		y++;
+		if ((*ptr)[y][x].color == RED && (*ptr)[y][x + 1].color == RED)
+			info->color = RED;
+		else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
+			info->color = GREEN;
+		else
+			info->color = TEAL;
+		draw_line(info, (*info->array)[y][x].x * info->zoom + info->p_x,
+		(*info->array)[y][x].y * info->zoom + info->p_y,
+		(*info->array)[y][x + 1].x * info->zoom + info->p_x,
+		(*info->array)[y][x + 1].y * info->zoom + info->p_y);
 	}
 }
 
-void	apply_height(t_info *info, int key)
+void	draw_y(t_info *info, int y, int x)
 {
-	int		x;
-	int		y;
 	t_arr	***ptr;
 
 	ptr = info->array;
-	y = 0;
-	x = 0;
-	while (y < info->size_y)
-	{
-		x = 0;
-		while (x < info->size_x)
-		{
-			if (key == 122)
-				(*ptr)[y][x].z += 3;
-			else
-				(*ptr)[y][x].z -= 3;
-			x++;
-		}
-		y++;
-	}
+	if ((*ptr)[y][x].color == RED && (*ptr)[y + 1][x].color == RED)
+		info->color = RED;
+	else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
+		info->color = GREEN;
+	else
+		info->color = TEAL;
+	draw_line(info, (*info->array)[y][x].x * info->zoom + info->p_x,
+	(*info->array)[y][x].y * info->zoom + info->p_y,
+	(*info->array)[y + 1][x].x * info->zoom + info->p_x,
+	(*info->array)[y + 1][x].y * info->zoom + info->p_y);
 }
 
 int		draw_grid(t_info *info, int x, int y)
 {
-	t_arr	***ptr;	
+	t_arr	***ptr;
 	int		color;
 
 	ptr = info->array;
@@ -100,32 +64,9 @@ int		draw_grid(t_info *info, int x, int y)
 		x = 0;
 		while (x < info->size_x)
 		{
-			if (x < info->size_x - 1)
-			{
-				if ((*ptr)[y][x].color == RED && (*ptr)[y][x + 1].color == RED)
-					color = RED;
-				else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
-					color = GREEN;
-				else
-					color = TEAL;
-				draw_line(info, (*ptr)[y][x].x * info->zoom + info->p_x,
-					(*ptr)[y][x].y * info->zoom + info->p_y,
-					(*ptr)[y][x + 1].x * info->zoom + info->p_x,
-					(*ptr)[y][x + 1].y * info->zoom + info->p_y, color);
-			}
+			draw_x(info, y, x);
 			if (y < info->size_y - 1)
-			{
-				if ((*ptr)[y][x].color == RED && (*ptr)[y + 1][x].color == RED)
-					color = RED;
-				else if ((*ptr)[y][x].color == GREEN && (*ptr)[y][x + 1].color == GREEN)
-					color = GREEN;
-				else
-					color = TEAL;
-				draw_line(info, (*ptr)[y][x].x * info->zoom + info->p_x,
-					(*ptr)[y][x].y * info->zoom + info->p_y,
-					(*ptr)[y + 1][x].x * info->zoom + info->p_x,
-					(*ptr)[y + 1][x].y * info->zoom + info->p_y, color);
-			}
+				draw_y(info, y, x);
 			x++;
 		}
 		y++;
@@ -134,7 +75,7 @@ int		draw_grid(t_info *info, int x, int y)
 	return (0);
 }
 
-int		draw_line(t_info *info, int beginX, int beginY, int endX, int endY, int color)
+int		draw_line(t_info *info, int begin_x, int begin_y, int end_x, int end_y)
 {
 	double		delta_x;
 	double		delta_y;
@@ -142,16 +83,17 @@ int		draw_line(t_info *info, int beginX, int beginY, int endX, int endY, int col
 	double		pixel_y;
 	double		pixels;
 
-	delta_x = endX - beginX;
-	delta_y = endY - beginY;
+	delta_x = end_x - begin_x;
+	delta_y = end_y - begin_y;
 	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	pixel_x = beginX;
-	pixel_y = beginY;
+	pixel_x = begin_x;
+	pixel_y = begin_y;
 	delta_x /= pixels;
 	delta_y /= pixels;
 	while (pixels > 0)
 	{
-		mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel_x, pixel_y, color);
+		mlx_pixel_put(info->mlx_ptr, info->win_ptr,
+		pixel_x, pixel_y, info->color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;

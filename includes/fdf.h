@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thien <thien@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thinguye <thinguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:37:18 by thinguye          #+#    #+#             */
-/*   Updated: 2020/03/16 12:38:45 by thien            ###   ########.fr       */
+/*   Updated: 2020/05/31 23:35:04 by thinguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
 # define KEY_R 114
-# define KEY_Z 122
-# define KEY_C 99
+# define KEY_Q 113
+# define KEY_E 101
 # define ROTATION_DEG 0.05
 
 #include <stdio.h> //DELETE
@@ -60,11 +60,12 @@ typedef struct		s_info
 	double	p_x;
 	double	p_y;
 	int		is_isometric;
+	int		color;
 	t_arr	***array;
 }					t_info;
 
 void		get_x_y(char **argv, t_info *info);
-int			draw_line(t_info *info, int beginX, int beginY, int endX, int endY, int color);
+int			draw_line(t_info *info, int beginX, int beginY, int endX, int endY);
 int			draw_grid(t_info *info, int x, int y);
 int			error_msg();
 int			get_x(char *str, t_info *info);
@@ -72,4 +73,6 @@ void		show_buttons(t_info *info);
 t_arr		**create_int_arr(char **argv, t_info *info);
 int			deal_key(int keycode, t_info *info);
 void		apply_height(t_info *info, int key);
+void		apply_iso(t_info *info);
+void		apply_parallel(t_info *info);
 #endif
