@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:42:05 by thinguye          #+#    #+#             */
-/*   Updated: 2020/01/09 12:14:47 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/07/03 12:20:24 by thinguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 5000000
 # define MAX_FD 10240
 
 int		get_next_line(const int fd, char **line);

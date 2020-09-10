@@ -3,17 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thinguye <thinguye@student.42.fr>          +#+  +:+       +#+         #
+#    By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 12:46:14 by thinguye          #+#    #+#              #
-#    Updated: 2020/05/28 14:33:32 by thinguye         ###   ########.fr        #
+#    Updated: 2020/08/03 12:35:23 by thinguye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-FLAGS = -L /usr/lib/X11 -lmlx -lXext -lX11 -lm
-FLGS = minilibx/minilibx/libmlx.a -lm -lX11 -lXext
-SRC = src/main.c src/map_info.c src/draw.c src/deal_key.c src/apply_modif.c
+MACOS_FLAGS = -lmlx -framework OpenGL -framework AppKit
+LINUX_FLAGS = minilibx_linux/minilibx/libmlx.a -lm -lX11 -lXext
+COMP_FLAGS = -Wall -Wextra -Werror
+SRC = src/main.c \
+		src/map_info.c \
+		src/draw.c \
+		src/deal_key.c \
+		src/apply_modif.c \
+		src/check_if_valid.c
 HDR = fdf.h
 LIB = libft/libft.a
 
@@ -23,8 +29,16 @@ $(NAME):
 	@echo compiling libft
 	@make -C libft
 	@make -C libft clean
-	@echo compiling executable
-	@gcc $(SRC) -I $(HDR) $(LIB) $(FLGS) -o $(NAME)
+	@echo compiling macos executable
+	@gcc $(COMP_FLAGS) $(SRC) -I $(HDR) $(LIB) $(MACOS_FLAGS) -o $(NAME)
+	@echo success
+
+linux:
+	@echo compiling libft
+	@make -C libft
+	@make -C libft clean
+	@echo compiling linux executable
+	@gcc $(SRC) includes/$(HDR) $(LIB) $(LINUX_FLAGS) -o $(NAME)
 	@echo success
 
 clean:

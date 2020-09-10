@@ -1,0 +1,29 @@
+make fclean
+make
+echo $'1: 42\n2: 20-60'
+echo $'3: 50-4\n4: elem'
+echo $'5: pylone\n6: pyramide'
+echo $'7: 100-6\n8: pnp_flat'
+echo $'9: mars'
+while true; do
+read -rsn1 input
+if [ "$input" = "1" ]; then
+    ./fdf test_maps/42.fdf
+elif [ "$input" = "2" ]; then
+    ./fdf test_maps/20-60.fdf
+elif [ "$input" = "3" ]; then
+    ./fdf test_maps/50-4.fdf
+elif [ "$input" = "4" ]; then
+    ./fdf test_maps/elem.fdf
+elif [ "$input" = "5" ]; then
+    ./fdf test_maps/pylone.fdf
+elif [ "$input" = "6" ]; then
+    ./fdf test_maps/pyramide.fdf
+elif [ "$input" = "7" ]; then
+    ./fdf test_maps/100-6.fdf
+elif [ "$input" = "8" ]; then
+    ./fdf test_maps/pnp_flat.fdf
+elif [ "$input" = "9" ]; then
+    ./fdf test_maps/mars.fdf
+fi
+done

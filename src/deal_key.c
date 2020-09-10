@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deal_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:09:08 by thinguye          #+#    #+#             */
-/*   Updated: 2020/05/28 13:38:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/28 15:16:45 by thinguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		reset_pos(t_info *info)
 		info->p_x = 250;
 		info->p_y = 250;
 	}
-	draw_grid(info, 0, 0);
+	draw_grid(info);
 }
 
 void		keycodes_wasd(int keycode, t_info *info)
@@ -41,25 +41,25 @@ void		keycodes_wasd(int keycode, t_info *info)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->p_x += 25;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 	if (keycode == KEY_A)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->p_x -= 25;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 	if (keycode == KEY_W)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->p_y -= 25;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 	if (keycode == KEY_S)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->p_y += 25;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 }
 
@@ -69,18 +69,25 @@ void		keycodes_arrows(int keycode, t_info *info)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->zoom *= 1.25;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 	if (keycode == KEY_DOWN)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->zoom *= 0.8;
-		draw_grid(info, 0, 0);
+		draw_grid(info);
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		info->z_axis += 0.3;
+		mlx_clear_window(info->mlx_ptr, info->win_ptr);
+		draw_grid(info);
 	}
 	if (keycode == KEY_LEFT)
 	{
+		info->z_axis -= 0.3;
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 }
 
@@ -93,14 +100,7 @@ int			deal_key(int keycode, t_info *info)
 	{
 		mlx_clear_window(info->mlx_ptr, info->win_ptr);
 		info->is_isometric = info->is_isometric == 2 ? 0 : 1;
-		reset_pos(info);
-		draw_grid(info, 0, 0);
-	}
-	if (keycode == KEY_Q || keycode == KEY_E)
-	{
-		mlx_clear_window(info->mlx_ptr, info->win_ptr);
-		apply_height(info, keycode);
-		draw_grid(info, 0, 0);
+		draw_grid(info);
 	}
 	keycodes_arrows(keycode, info);
 	keycodes_wasd(keycode, info);

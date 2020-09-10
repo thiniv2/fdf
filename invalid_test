@@ -1,0 +1,21 @@
+make fclean
+make
+echo $'chars:'
+./fdf invalid_maps/char.fdf
+./fdf invalid_maps/char2.fdf
+./fdf invalid_maps/char3.fdf
+echo $'\nEOL:'
+./fdf invalid_maps/eol.fdf
+echo $'\nspaces:'
+./fdf invalid_maps/spaces.fdf
+echo $'\nvertex:'
+./fdf invalid_maps/vertex.fdf
+./fdf invalid_maps/vertex2.fdf
+./fdf invalid_maps/vertex3.fdf
+echo $'\nmax & min int:'
+./fdf invalid_maps/max_int.fdf
+./fdf invalid_maps/min_int.fdf
+echo $'\ndirectory:'
+./fdf invalid_maps/
+echo $'\nempty map:'
+./fdf invalid_maps/empty.fdf

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thinguye <thinguye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thinguye <thinguye@student.42.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:41:55 by thinguye          #+#    #+#             */
-/*   Updated: 2019/11/18 16:30:36 by thinguye         ###   ########.fr       */
+/*   Updated: 2020/07/03 12:06:06 by thinguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_new_line(int fd, char **line, char **str)
 		free(str[fd]);
 		str[fd] = tmp;
 	}
-	else if (str[fd][len] == '\0')
+	else
 	{
 		if (!(*line = ft_strdup(str[fd])))
 			return (-1);
